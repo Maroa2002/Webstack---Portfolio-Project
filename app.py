@@ -1,7 +1,11 @@
 from flask import Flask, render_template
+from datetime import datetime
 
 
 app = Flask(__name__)
+
+
+# current_year = get_current_year()
 
 
 @app.route("/")
@@ -32,6 +36,10 @@ def about():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
+
+
+def get_current_year():
+    return datetime.now().year
 
 
 if __name__ == "__main__":
