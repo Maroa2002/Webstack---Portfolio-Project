@@ -393,8 +393,8 @@ footer {
 /* styling for the contatct page */
 .contact {
     position: relative;
-    min-height: 100vh;
-    padding: 50px 100px;
+    min-height: 70vh;
+    padding: 30px 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -421,7 +421,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .contact-container .contact-info {
@@ -463,7 +463,7 @@ footer {
 .contact-form {
     width: 40%;
     padding: 40px;
-    /* background: #f2f2f2; */
+    background: #999;
 }
 
 .contact-form h2 {
