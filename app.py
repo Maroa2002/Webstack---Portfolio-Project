@@ -32,7 +32,7 @@ class Post(db.Model):
 
 
 @app.route("/")
-def home():
+def retrieve_all_posts():
     posts = Post.query.all()
     return render_template("index.html", posts=posts)
 

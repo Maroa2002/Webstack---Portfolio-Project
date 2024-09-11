@@ -13,9 +13,9 @@
      <!-- navbar -->
         <nav class = "navbar">
             <div class = "container">
-                <a href = "{{ url_for('home') }}" class = "navbar-brand">Blog</a>
+                <a href = "{{ url_for('retrieve_all_posts') }}" class = "navbar-brand">Blog</a>
                 <div class = "navbar-nav">
-                    <a href = "{{ url_for('home') }}">home</a>
+                    <a href = "{{ url_for('retrieve_all_posts') }}">home</a>
                     <a href = "{{ url_for('login') }}">login</a>
                     <a href = "{{ url_for('signup') }}">sign up</a>
                     <a href = "{{ url_for('about') }}">about</a>
