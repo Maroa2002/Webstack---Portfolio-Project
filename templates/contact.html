@@ -3,7 +3,11 @@
 <section class="contact">
 
     <div class="contact-content">
-        <h2>Contact Me</h2>
+        {% if request.method == 'POST' %}
+            <h1>Successfully sent message!</h1>
+        {% else %}
+            <h2>Contact Me</h2>
+        {% endif %}
         <p>
             Want to get in touch? Fill out the form below to send me a message and
             I will get back to you as soon as possible!
