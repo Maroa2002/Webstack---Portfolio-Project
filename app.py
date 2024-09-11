@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from datetime import datetime
 import smtplib
 import os
@@ -26,9 +26,6 @@ class Post(db.Model):
     body = db.Column(db.Text, nullable=False)
     author = db.Column(db.String(250), nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
-
-
-# current_year = get_current_year()
 
 
 @app.route("/")
@@ -63,6 +60,20 @@ def view_dashboard():
 
 @app.route("/new-post", methods=["POST", "GET"])
 def create_new_post():
+    if request.method == "POST":
+        new_post = Post(
+            title = request.form.get("title"),
+            subtitle = request.form.get("subtitle"),
+            date = get_current_date(),
+            body = request.form.get("body"),
+            author = request.form.get("author"),
+            img_url = request.form.get("img_url"),
+        )
+
+        db.session.add(new_post)
+        db.session.commit()
+
+        return redirect(url_for('view_dashboard'))
     return render_template("new-post.html")
 
 
@@ -97,8 +108,8 @@ def contact():
     return render_template("contact.html")
 
 
-def get_current_year():
-    return datetime.now().year
+def get_current_date():
+    return datetime.now().strftime("%Y-%m-%d")
 
 
 if __name__ == "__main__":
