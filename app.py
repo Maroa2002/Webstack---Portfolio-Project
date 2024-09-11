@@ -54,6 +54,12 @@ def get_each_post(post_id):
     return render_template("post.html", post=post)
 
 
+@app.route("/new-post", methods=["POST", "GET"])
+def make_new_post():
+
+    return render_template("new-post.html")
+
+
 @app.route("/about")
 def about():
     return render_template("about.html")
