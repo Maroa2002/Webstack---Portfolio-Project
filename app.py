@@ -54,10 +54,11 @@ def get_each_post(post_id):
     return render_template("post.html", post=post)
 
 
-@app.route("/new-post", methods=["POST", "GET"])
-def make_new_post():
+@app.route("/dashboard", methods=["POST", "GET"])
+def view_dashboard():
+    posts = Post.query.all()
 
-    return render_template("new-post.html")
+    return render_template("dashboard.html", posts=posts)
 
 
 @app.route("/about")
