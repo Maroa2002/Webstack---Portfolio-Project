@@ -29,7 +29,7 @@
                     <span>{{ post.author }}</span>
                     <a href="" class="blog-title">{{ post.title }}</a>
                     <p>{{ post.subtitle }}</p>
-                    <a href="" class="read-more">Read More</a>
+                    <a href="{{ url_for('get_each_post', post_id=post.id) }}" class="read-more">Read More</a>
                 </div>
 
             </div>
