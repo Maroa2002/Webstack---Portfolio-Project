@@ -5,7 +5,8 @@
     <div class="contact-content">
         <h2>Contact Me</h2>
         <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Want to get in touch? Fill out the form below to send me a message and
+            I will get back to you as soon as possible!
         </p>
     </div>
     <div class="contact-container">
@@ -40,7 +41,7 @@
         </div>
 
         <div class="contact-form">
-            <form action="">
+            <form action="{{ url_for('contact') }}" method="post">
                 <h2>Send Message</h2>
                 <div class="input-box">
                     <label for="username">Full Name</label>
