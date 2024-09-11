@@ -39,6 +39,20 @@ h2 {
     margin-bottom: 20px;
 }
 
+.btn-back-post {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
 .btn-new-post:hover {
     background-color: #0056b3;
 }

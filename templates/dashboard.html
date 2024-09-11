@@ -10,7 +10,8 @@
 
 <div class="container">
     <h2>Dashboard</h2>
-    <a href="new-post.html" class="btn-new-post">Create New Post</a>
+    <a href="{{ url_for('create_new_post') }}" class="btn-back-post">Back</a>
+    <a href="{{ url_for('create_new_post') }}" class="btn-new-post">Create New Post</a>
     <table>
         <thead>
             <tr>
