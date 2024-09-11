@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/dashboard.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Dashboard</h2>
+    <a href="new-post.html" class="btn-new-post">Create New Post</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Author</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.subtitle }}</td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.date }}</td>
+                <td>
+                    <a href="edit-post.html?id=1" class="btn-edit">Edit</a>
+                    <a href="delete-post.html?id=1" class="btn-delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
