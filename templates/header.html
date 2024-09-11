@@ -14,14 +14,14 @@
      <header>
         <nav class = "navbar">
             <div class = "container">
-            <a href = "" class = "navbar-brand">Blog</a>
-            <div class = "navbar-nav">
-                <a href = "">home</a>
-                <a href = "">login</a>
-                <a href = "">sign up</a>
-                <a href = "">about</a>
-                <a href = "">contact</a>
-                <a href = "">log out</a>
-            </div>
+                <a href = "{{ url_for('home') }}" class = "navbar-brand">Blog</a>
+                <div class = "navbar-nav">
+                    <a href = "{{ url_for('home') }}">home</a>
+                    <a href = "{{ url_for('login') }}">login</a>
+                    <a href = "{{ url_for('signup') }}">sign up</a>
+                    <a href = "{{ url_for('about') }}">about</a>
+                    <a href = "{{ url_for('contact') }}">contact</a>
+                    <a href = "">log out</a>
+                </div>
             </div>
         </nav>
