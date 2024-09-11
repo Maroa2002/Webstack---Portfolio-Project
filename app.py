@@ -33,7 +33,8 @@ class Post(db.Model):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    posts = Post.query.all()
+    return render_template("index.html", posts=posts)
 
 
 @app.route("/login")
