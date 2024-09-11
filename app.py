@@ -61,6 +61,11 @@ def view_dashboard():
     return render_template("dashboard.html", posts=posts)
 
 
+@app.route("/new-post", methods=["POST", "GET"])
+def create_new_post():
+    return render_template("new-post.html")
+
+
 @app.route("/about")
 def about():
     return render_template("about.html")
