@@ -2,11 +2,20 @@ from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 import smtplib
 import os
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
+
+# setup for the smtp to send emails
 my_email = "mgm.engineeringtie847@gmail.com"
 gmail_password = os.environ.get("GMAIL_PASSWORD")
+
+# configurations for sqlalchemy and the database
+DB_PWD = os.environ.get("DB_PWD")
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{DB_PWD}@localhost/blog'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app) #  creating the db object for managing CRUD operations
 
 
 # current_year = get_current_year()
