@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 
 
@@ -33,8 +33,20 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/contact")
+@app.route("/contact", methods=['POST', 'GET'])
 def contact():
+    if request.method == "POST":
+        name = request.form.get("username")
+        email = request.form.get("email")
+        message = request.form.get("message")
+
+        # Basic validation
+        if not name or not email or not message:
+            return jsonify({"error": "All fields are required!"}), 400
+
+        print(name, email, message)
+        return jsonify({"message": "Message successfully sent"}), 200
+
     return render_template("contact.html")
 
 
