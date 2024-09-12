@@ -3,9 +3,13 @@ from datetime import datetime
 import smtplib
 import os
 from flask_sqlalchemy import SQLAlchemy
+from flask_ckeditor import CKEditor
 
 
 app = Flask(__name__)
+
+# initializing CKEditor
+ckeditor = CKEditor(app)
 
 # setup for the smtp to send emails
 my_email = "mgm.engineeringtie847@gmail.com"
@@ -74,7 +78,7 @@ def create_new_post():
         db.session.commit()
 
         return redirect(url_for('view_dashboard'))
-    return render_template("new-post.html")
+    return render_template("create-edit-post.html")
 
 
 @app.route('/delete-post/<int:post_id>')
@@ -102,7 +106,7 @@ def edit_current_post(post_id):
 
         return redirect(url_for('get_each_post', post_id=post_to_edit.id))
 
-    return render_template("edit-post.html", post_to_edit=post_to_edit)
+    return render_template("create-edit-post.html", post_to_edit=post_to_edit)
 
 
 @app.route("/about")
