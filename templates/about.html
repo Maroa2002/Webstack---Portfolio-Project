@@ -1,27 +1,42 @@
-{% include "header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
     
-    <div class="heading">
-        <h1>About</h1>
-        <p>
-            If you have some problem with the drivers try running the application from the command line and see if there are graphics related warnings. Also type dmesg to see if there are other related information here.
-        </p>
-    </div>
+</head>
+<body>
 
-    <div class="about-container">
-        <section class="about">
-            <div class="about-image">
-                <img src="static/images/post.jpg" alt="About-image">
-            </div>
+    {% include "header.html" %}
+    
+        <div class="heading">
+            <h1>About</h1>
+            <p>
+                If you have some problem with the drivers try running the application from the command line and see if there are graphics related warnings. Also type dmesg to see if there are other related information here.
+            </p>
+        </div>
 
-            <div class="about-content">
-                <h2>Warm embrace in a cup</h2>
-                <p>
-                    If you have some problem with the drivers try running the application from the command line and see if there are graphics related warnings. Also type dmesg to see if there are other related information here.
-                    If you get crashes install the relevant -dbg pacakges (libgl1-mesa-dri-dbg or libgl1-mesa-dri-experimental-dbg for 3D drivers and xserver-xorg-video-intel-dbg , xserver-xorg-video-nouveau-dbg or xserver-xorg-video-radeon-dbg for X drivers) and reproduce the crash with gdb. 
-                </p>
-                <a href="" class="read-more">Read More</a>
-            </div>
-        </section>
-    </div>
+        <div class="about-container">
+            <section class="about">
+                <div class="about-image">
+                    <img src="static/images/post.jpg" alt="About-image">
+                </div>
 
-{% include "footer.html" %}
+                <div class="about-content">
+                    <h2>Warm embrace in a cup</h2>
+                    <p>
+                        If you have some problem with the drivers try running the application from the command line and see if there are graphics related warnings. Also type dmesg to see if there are other related information here.
+                        If you get crashes install the relevant -dbg pacakges (libgl1-mesa-dri-dbg or libgl1-mesa-dri-experimental-dbg for 3D drivers and xserver-xorg-video-intel-dbg , xserver-xorg-video-nouveau-dbg or xserver-xorg-video-radeon-dbg for X drivers) and reproduce the crash with gdb. 
+                    </p>
+                </div>
+            </section>
+        </div>
+
+    {% include "footer.html" %}
+
+</body>
+</html>

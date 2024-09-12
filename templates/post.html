@@ -1,22 +1,38 @@
-{% include "header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
     
-    <div class="heading">
-        <h1>{{ post.title }}</h1>
-    </div>
+</head>
+<body>
+    
+    {% include "header.html" %}
+    
+        <div class="heading">
+            <h1>{{ post.title }}</h1>
+        </div>
 
-    <div class="container">
-        <section class="about">
-            <div class="about-image">
-                <img src="{{ post.img_url }}" alt="About-image">
-            </div>
+        <div class="container">
+            <section class="about">
+                <div class="about-image">
+                    <img src="{{ post.img_url }}" alt="About-image">
+                </div>
 
-            <div class="about-content">
-                <h2>{{ post.subtitle }}</h2>
-                <p>
-                    {{ post.body | safe }}
-                </p>
-            </div>
-        </section>
-    </div>
+                <div class="about-content">
+                    <h2>{{ post.subtitle }}</h2>
+                    <p>
+                        {{ post.body | safe }}
+                    </p>
+                </div>
+            </section>
+        </div>
 
     {% include "footer.html" %}
+
+</body>
+</html>

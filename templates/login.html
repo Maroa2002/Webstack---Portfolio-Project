@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page_title }}</title>
+     <!-- Font Awesome icons (free version)-->
+     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
-
-    <!-- Include header from a separate template -->
-    <!-- {% include 'header.html' %} -->
+   
+    {% include "header.html" %}
 
     <div class="login-container">
         <div class="login-box">
@@ -51,8 +52,7 @@
         </div>
     </div>
 
-    <!-- Include footer from a separate template -->
-    <!-- {% include 'footer.html' %} -->
+    {% include "footer.html" %}
 
 </body>
 </html>
