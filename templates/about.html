@@ -14,23 +14,31 @@
     {% include "header.html" %}
     
         <div class="heading">
-            <h1>About</h1>
-            <p>
+            <h1>About Me</h1>
+            <!-- <p>
                 If you have some problem with the drivers try running the application from the command line and see if there are graphics related warnings. Also type dmesg to see if there are other related information here.
-            </p>
+            </p> -->
         </div>
 
         <div class="about-container">
             <section class="about">
                 <div class="about-image">
-                    <img src="static/images/post.jpg" alt="About-image">
+                    <img src="{{ url_for('static', filename='/images/my-photo.jpeg') }}" alt="About-image">
                 </div>
 
                 <div class="about-content">
-                    <h2>Warm embrace in a cup</h2>
+                    <!-- <h2>Warm embrace in a cup</h2> -->
                     <p>
-                        If you have some problem with the drivers try running the application from the command line and see if there are graphics related warnings. Also type dmesg to see if there are other related information here.
-                        If you get crashes install the relevant -dbg pacakges (libgl1-mesa-dri-dbg or libgl1-mesa-dri-experimental-dbg for 3D drivers and xserver-xorg-video-intel-dbg , xserver-xorg-video-nouveau-dbg or xserver-xorg-video-radeon-dbg for X drivers) and reproduce the crash with gdb. 
+                        Hello! I'm George Maroa, currently a final-year student pursuing a Bachelor’s degree in Telecommunication and Information Engineering at the Jomo Kenyatta University of Agriculture and Technology (JKUAT). My academic journey has allowed me to explore the fascinating world of communication networks, digital systems, and data transmission, igniting my passion for technology and engineering innovation. <br><br>
+
+                        In addition to my university studies, I am also an ALX Software Engineering student, specializing in backend development. Through this intensive program, I’ve honed my skills in languages like Python, JavaScript (Node.js), and database management with tools like MongoDB, MySQL, and Redis. Currently, I'm working on my end-of-year portfolio project, where I’m integrating all that I’ve learned into real-world applications. <br><br>
+
+                        I’m passionate about solving complex problems and building scalable, efficient systems. With a solid foundation in both hardware and software, my goal is to bridge the gap between telecommunications and software engineering. Whether it’s developing robust backend infrastructures or creating solutions for seamless data communication, I’m driven to be at the forefront of technological advancements. <br><br>
+
+                        When I'm not coding, you can find me exploring new technologies, collaborating on open-source projects, or reading about the latest trends in engineering and software development. <br><br>
+
+                        Thank you for visiting my page!
+
                     </p>
                 </div>
             </section>
