@@ -1,0 +1,109 @@
+/* Reset some default styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style for the main container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+/* Style for the login box */
+.login-box {
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Input group styling */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #666;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #5c9ded;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #5c9ded;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4a8bde;
+}
+
+/* Styling for the sign-up/login toggle link */
+.toggle-link {
+    margin-top: 15px;
+}
+
+.toggle-link p {
+    font-size: 14px;
+    color: #666;
+}
+
+.toggle-link a {
+    color: #5c9ded;
+    text-decoration: none;
+}
+
+.toggle-link a:hover {
+    text-decoration: underline;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .login-box {
+        padding: 20px;
+    }
+
+    button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .input-group input {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

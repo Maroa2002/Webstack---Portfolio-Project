@@ -1,25 +1,58 @@
-{% include "header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
 
-<div class="center">
-    <h1>Login</h1>
-    <form action="" method="post">
-        <div class="text_field">
-            <input type="text" name="username" required>
-            <label for="username">Username</label>
-            <span></span>
-        </div>
-        <div class="text_field">
-            <input type="password" name="password" required>
-            <label for="password">Password</label>
-            <span></span>
-        </div>
-        <div class="forgot">Forgot password?</div>
-        <input type="submit" value="Login">
-        <div class="signup">
-            Not registered? <a href="">Sign Up</a>
-        </div>
-    </form>
-</div>
+    <!-- Include header from a separate template -->
+    <!-- {% include 'header.html' %} -->
 
+    <div class="login-container">
+        <div class="login-box">
+            <h2>{{ page_title }}</h2>
+            <form action="{{ form_action }}" method="POST">
+                {% if page_title == 'Sign Up' %}
+                    <div class="input-group">
+                        <label for="username">Name:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
 
-{% include "footer.html" %}
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <!-- {% if page_title == 'Sign Up' %}
+                    <div class="input-group">
+                        <label for="confirm_password">Confirm Password:</label>
+                        <input type="password" id="confirm_password" name="confirm_password" required>
+                    </div>
+                {% endif %} -->
+
+                <button type="submit">{{ page_title }}</button>
+            </form>
+
+            <div class="toggle-link">
+                {% if page_title == 'Login' %}
+                <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a></p>
+                {% else %}
+                <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Include footer from a separate template -->
+    <!-- {% include 'footer.html' %} -->
+
+</body>
+</html>
