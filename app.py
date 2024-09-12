@@ -4,6 +4,7 @@ import smtplib
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor
+from werkzeug.security import generate_password_hash
 
 
 app = Flask(__name__)
@@ -59,10 +60,15 @@ def login():
 @app.route("/signup", methods=["POST", "GET"])
 def signup():
     if request.method == 'POST':
-        username = request.form.get("username")
-        email = request.form.get("email")
-        password = request.form.get("password")
-        confirm_password = request.form.get("confirm_password")
+        new_user = User(
+            name = request.form.get("username"),
+            email = request.form.get("email"),
+            password = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8),
+            # confirm_password = request.form.get("confirm_password")
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
 
         return redirect(url_for('retrieve_all_posts'))
     return render_template("login.html", page_title='Sign Up', form_action=url_for('signup'))
