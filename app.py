@@ -38,14 +38,26 @@ def retrieve_all_posts():
     return render_template("index.html", posts=posts)
 
 
-@app.route("/login")
+@app.route("/login", methods=["POST", "GET"])
 def login():
-    return render_template("login.html")
+    if request.method == 'POST':
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        return redirect(url_for('retrieve_all_posts'))
+    return render_template("login.html", page_title='Login', form_action=url_for('login'))
 
 
-@app.route("/signup")
+@app.route("/signup", methods=["POST", "GET"])
 def signup():
-    return render_template("signup.html")
+    if request.method == 'POST':
+        username = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+
+        return redirect(url_for('retrieve_all_posts'))
+    return render_template("login.html", page_title='Sign Up', form_action=url_for('signup'))
 
 
 @app.route("/post/<int:post_id>")
