@@ -77,6 +77,34 @@ def create_new_post():
     return render_template("new-post.html")
 
 
+@app.route('/delete-post/<int:post_id>')
+def delete_post(post_id):
+    post_to_delete = Post.query.get_or_404(post_id)
+
+    db.session.delete(post_to_delete)
+    db.session.commit()
+
+    return redirect(url_for('view_dashboard'))
+
+
+@app.route("/edit-post/<int:post_id>", methods=["POST", "GET"])
+def edit_current_post(post_id):
+    post_to_edit = Post.query.get_or_404(post_id)
+
+    if request.method == "POST":
+        post_to_edit.title = request.form.get("title")
+        post_to_edit.subtitle = request.form.get("subtitle")
+        post_to_edit.body = request.form.get("body")
+        post_to_edit.author = request.form.get("author")
+        post_to_edit.img_url = request.form.get("img_url")
+
+        db.session.commit()
+
+        return redirect(url_for('get_each_post', post_id=post_to_edit.id))
+
+    return render_template("edit-post.html", post_to_edit=post_to_edit)
+
+
 @app.route("/about")
 def about():
     return render_template("about.html")
