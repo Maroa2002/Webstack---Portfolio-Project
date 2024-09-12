@@ -5,7 +5,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, UserMixin, login_user, login_required
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 
 
 app = Flask(__name__)
@@ -87,6 +87,8 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
+        login_user(new_user)
+
         return redirect(url_for('retrieve_all_posts'))
     return render_template("login.html", page_title='Sign Up', form_action=url_for('signup'))
 
@@ -136,6 +138,13 @@ def delete_post(post_id):
     db.session.commit()
 
     return redirect(url_for('view_dashboard'))
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 
 @app.route("/edit-post/<int:post_id>", methods=["POST", "GET"])
