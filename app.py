@@ -4,8 +4,8 @@ import smtplib
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor
-from werkzeug.security import generate_password_hash
-from flask_login import LoginManager, UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, UserMixin, login_user, login_required
 
 
 app = Flask(__name__)
@@ -64,10 +64,13 @@ def retrieve_all_posts():
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == 'POST':
-        email = request.form.get("email")
-        password = request.form.get("password")
+        user = User.query.filter_by(email = request.form.get("email")).first()
+        if user:
+            password_match = check_password_hash(user.password, request.form.get("password"))
+            if password_match:
+                login_user(user)
+                return redirect(url_for('retrieve_all_posts'))
 
-        return redirect(url_for('retrieve_all_posts'))
     return render_template("login.html", page_title='Login', form_action=url_for('login'))
 
 
@@ -89,6 +92,7 @@ def signup():
 
 
 @app.route("/post/<int:post_id>")
+@login_required
 def get_each_post(post_id):
     post = Post.query.get_or_404(post_id)
 
@@ -96,6 +100,7 @@ def get_each_post(post_id):
 
 
 @app.route("/dashboard", methods=["POST", "GET"])
+@login_required
 def view_dashboard():
     posts = Post.query.all()
 
@@ -103,6 +108,7 @@ def view_dashboard():
 
 
 @app.route("/new-post", methods=["POST", "GET"])
+@login_required
 def create_new_post():
     if request.method == "POST":
         new_post = Post(
@@ -122,6 +128,7 @@ def create_new_post():
 
 
 @app.route('/delete-post/<int:post_id>')
+@login_required
 def delete_post(post_id):
     post_to_delete = Post.query.get_or_404(post_id)
 
@@ -132,6 +139,7 @@ def delete_post(post_id):
 
 
 @app.route("/edit-post/<int:post_id>", methods=["POST", "GET"])
+@login_required
 def edit_current_post(post_id):
     post_to_edit = Post.query.get_or_404(post_id)
 
@@ -150,11 +158,13 @@ def edit_current_post(post_id):
 
 
 @app.route("/about")
+@login_required
 def about():
     return render_template("about.html")
 
 
 @app.route("/contact", methods=['POST', 'GET'])
+@login_required
 def contact():
     if request.method == "POST":
         name = request.form.get("username")
