@@ -83,12 +83,19 @@ def login():
 @app.route("/signup", methods=["POST", "GET"])
 def signup():
     if request.method == 'POST':
-        new_user = User(
-            name = request.form.get("username"),
-            email = request.form.get("email"),
-            password = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8),
-            # confirm_password = request.form.get("confirm_password")
-        )
+        email = request.form.get("email")
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('Email already in use! Log in instead!', 'error')
+            return redirect(url_for('login'))
+        else:
+            new_user = User(
+                name = request.form.get("username"),
+                email = email,
+                password = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8),
+                # confirm_password = request.form.get("confirm_password")
+            )
 
         db.session.add(new_user)
         db.session.commit()
