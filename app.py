@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
 from datetime import datetime
 import smtplib
 import os
@@ -68,9 +68,15 @@ def login():
         if user:
             password_match = check_password_hash(user.password, request.form.get("password"))
             if password_match:
+                flash('Successfully logged in!', 'success')
                 login_user(user)
                 return redirect(url_for('retrieve_all_posts'))
-
+            else:
+                flash('Incorrect Password!', 'error')
+                return redirect(url_for("login"))
+        else:
+            flash('Email does not exist.Please Try Again!', 'error')
+            return redirect(url_for('login'))
     return render_template("login.html", page_title='Login', form_action=url_for('login'))
 
 
