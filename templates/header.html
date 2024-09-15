@@ -2,9 +2,9 @@
      <!-- navbar -->
         <nav class = "navbar">
             <div class = "container">
-                <a href = "{{ url_for('retrieve_all_posts') }}" class = "navbar-brand">Blog</a>
+                <a href = "{{ url_for('blogs') }}" class = "navbar-brand">Blog</a>
                 <div class = "navbar-nav">
-                    <a href = "{{ url_for('retrieve_all_posts') }}">home</a>
+                    <a href = "{{ url_for('blogs') }}">home</a>
                     {% if not current_user.is_authenticated %}
                         <a href = "{{ url_for('login') }}">login</a>
                         <a href = "{{ url_for('signup') }}">sign up</a>
