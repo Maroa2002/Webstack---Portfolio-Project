@@ -13,24 +13,33 @@
     
     {% include "header.html" %}
     
-        <div class="heading">
+    <main class="post-container">
+        <article class="post-content">
+            <!-- Blog Post Image -->
+            <div class="post-image">
+                <img src="{{ post.img_url }}" alt="{{ post.title }}">
+            </div>
+
+            <!-- Blog Post Title -->
             <h1>{{ post.title }}</h1>
-        </div>
+            <h3>{{ post.subtitle }}</h3>
 
-        <div class="container">
-            <section class="about">
-                <div class="about-image">
-                    <img src="{{ post.img_url }}" alt="About-image">
-                </div>
+            <!-- Blog Post Meta Info -->
+            <div class="post-meta">
+                <p>By <strong>{{ post.author }}</strong> | {{ post.date }}</p>
+            </div>
 
-                <div class="about-content">
-                    <h2>{{ post.subtitle }}</h2>
-                    <p>
-                        {{ post.body | safe }}
-                    </p>
-                </div>
-            </section>
+            <!-- Blog Post Body -->
+            <div class="post-body">
+                {{ post.body | safe }}
+            </div>
+        </article>
+
+        <!-- Back to Blog Button -->
+        <div class="back-btn-container">
+            <a href="{{ url_for('blogs') }}" class="back-btn">Back to Blogs</a>
         </div>
+    </main>
 
     {% include "footer.html" %}
 
