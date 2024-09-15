@@ -24,35 +24,33 @@
         </div>
       </header>
 
-      <!-- Blog Section -->
-      <section class="blog">
-
-        <div class="blog-heading">
-            <span>Recent Posts</span>
-        </div>
-
-        <div class="blog-container">
+      <div class="blog-container">
+        <h1>Blog Posts</h1>
+        
+        
+        <div class="blog-posts">
             {% for post in posts %}
-            <div class="blog-box">
-
-                <div class="blog-img">
-                    <img src="{{ post.img_url }}" alt="Blog-img">
-                </div>
-
-                <div class="blog-text">
-                    <span>{{ post.author }}</span>
-                    <a href="" class="blog-title">{{ post.title }}</a>
+                <div class="post">
+                    <h2>{{ post.title }}</h2>
                     <p>{{ post.subtitle }}</p>
-                    <a href="{{ url_for('get_each_post', post_id=post.id) }}" class="read-more">Read More</a>
+                    <p>{{ post.author }} - {{ post.date }}</p>
+                    <p>{{ post.body[:200] | safe}}...</p> <!-- Show a preview of the body -->
+                    <a href="{{ url_for('get_each_post', post_id=post.id) }}">Read More</a>
                 </div>
-
-            </div>
             {% endfor %}
-
         </div>
 
-    </section>
-
+        <div class="pagination">
+            {% if prev_url %}
+                <a href="{{ prev_url }}" class="btn">Previous</a>
+            {% endif %}
+            {% if next_url %}
+                <a href="{{ next_url }}" class="btn">Load More</a>
+            {% else %}
+                <p>No more posts to load.</p>
+            {% endif %}
+        </div>
+    </div>
     {% include "footer.html" %}
 
 </body>

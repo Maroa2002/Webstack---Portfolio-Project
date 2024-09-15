@@ -61,6 +61,24 @@ def retrieve_all_posts():
     return render_template("index.html", posts=posts)
 
 
+@app.route('/blogs', methods=['GET'])
+def blogs():
+    # Get the page number from the URL, default to 1 if not provided
+    page = request.args.get('page', 1, type=int)
+
+    # number of posts per page
+    per_page = 4
+
+    # Querying the database to get the posts for the current page
+    posts = Post.query.order_by(Post.date.desc()).paginate(page=page, per_page=per_page, error_out=False)
+
+    # next and previous page URLs
+    next_url = url_for('blogs', page=posts.next_num) if posts.has_next else None
+    prev_url = url_for('blogs', page=posts.prev_num) if posts.has_prev else None
+
+    return render_template('index.html', posts=posts.items, next_url=next_url, prev_url=prev_url)
+
+
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == 'POST':
