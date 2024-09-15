@@ -1,6 +1,6 @@
 
      <!-- navbar -->
-        <nav class = "navbar">
+        <!-- <nav class = "navbar">
             <div class = "container">
                 <a href = "{{ url_for('blogs') }}" class = "navbar-brand">Blog</a>
                 <div class = "navbar-nav">
@@ -17,4 +17,31 @@
                     {% endif %}
                 </div>
             </div>
+        </nav> -->
+
+<!-- header.html -->
+    <div class="header">
+        <div class="logo">
+            <a href="/">My Blog</a>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href = "{{ url_for('blogs') }}">HOME</a></li>
+                {% if not current_user.is_authenticated %}
+                    <li><a href = "{{ url_for('login') }}">LOGIN</a></li>
+                    <li><a href = "{{ url_for('signup') }}">SIGN UP</a></li>
+                {% endif %}
+                <li><a href = "{{ url_for('about') }}">ABOUT</a></li>
+                <li><a href = "{{ url_for('contact') }}">CONTACT</a></li>
+                <li><a href = "{{ url_for('view_dashboard') }}">DASHBOARD</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href = "{{ url_for('logout') }}">LOG OUT</a></li>
+                {% endif %}
+            </ul>
         </nav>
+        <div class="menu-icon" id="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
