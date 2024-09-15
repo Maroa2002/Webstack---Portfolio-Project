@@ -6,53 +6,71 @@
     <title>Home</title>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
+
     <!-- Add Bootstrap CSS for styling and carousel -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
-    
 </head>
 <body>
 
   {% include "header.html" %}
   
-     <header>
-        <div class = "banner">
-          <div class = "container">
-            <h1 class = "banner-title">
-               Personal Blog
-            </h1>
-            <p>everything that you want to know about art & design</p>
-          </div>
-        </div>
-      </header>
-
-      <div class="blog-container">
-        <h1>Blog Posts</h1>
-        
-        
-        <div class="blog-posts">
-            {% for post in posts %}
-                <div class="post">
-                    <h2>{{ post.title }}</h2>
-                    <p>{{ post.subtitle }}</p>
-                    <p>{{ post.author }} - {{ post.date }}</p>
-                    <p>{{ post.body[:200] | safe}}...</p> <!-- Show a preview of the body -->
-                    <a href="{{ url_for('get_each_post', post_id=post.id) }}">Read More</a>
+  <div class="container">
+    <!-- Blog Carousel for Latest Posts -->
+    <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for post in posts[:2] %}
+            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                <div class="carousel-background" style="background-image: url('{{ post.img_url }}');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>{{ post.title }}</h2>
+                        <p>{{ post.subtitle }}</p>
+                        <p>By {{ post.author }} on {{ post.date }}</p>
+                        <a href="{{ url_for('get_each_post', post_id=post.id) }}" class="btn btn-primary">Read More</a>
+                    </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
-
-        <div class="pagination">
-            {% if prev_url %}
-                <a href="{{ prev_url }}" class="btn">Previous</a>
-            {% endif %}
-            {% if next_url %}
-                <a href="{{ next_url }}" class="btn">Load More</a>
-            {% else %}
-                <p>No more posts to load.</p>
-            {% endif %}
-        </div>
+        <!-- Carousel Controls -->
+        <a class="carousel-control-prev" href="#blogCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#blogCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
+
+    <!-- Other Blog Posts Below Carousel -->
+    <h2 class="mt-5">More Posts</h2>
+    <div class="blog-posts">
+        {% for post in posts[2:] %}
+        <div class="post">
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.subtitle }}</p>
+            <p>By {{ post.author }} on {{ post.date }}</p>
+            <p>{{ post.body[:200] }}...</p> <!-- Show a preview of the body -->
+            <a href="{{ url_for('get_each_post', post_id=post.id) }}" class="btn btn-secondary">Read More</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination Section -->
+    <div class="pagination">
+        {% if prev_url %}
+            <a href="{{ prev_url }}" class="btn btn-outline-secondary">Previous</a>
+        {% endif %}
+        {% if next_url %}
+            <a href="{{ next_url }}" class="btn btn-outline-primary">Load More</a>
+        {% else %}
+            <p class="text-muted">No more posts to load.</p>
+        {% endif %}
+    </div>
+</div>
+
     {% include "footer.html" %}
 
      <!-- Add Bootstrap and jQuery Scripts for Carousel -->
