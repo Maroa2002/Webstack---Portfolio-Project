@@ -73,39 +73,6 @@ def blogs():
     return render_template('index.html', posts=posts.items, next_url=next_url, prev_url=prev_url)
 
 
-
-@app.route('/blogss', methods=['GET'])
-def blogss():
-    # Get the page number from the URL, default to 1 if not provided
-    page = request.args.get('page', 1, type=int)
-
-    # Set the number of posts per page (for pagination, excluding the carousel)
-    per_page = 2
-
-    # Query the database to get the first 3 posts for the carousel
-    latest_posts = Post.query.order_by(Post.date.desc()).limit(3).all()
-
-    # For pagination, order by date first, then offset and paginate
-    query = Post.query.order_by(Post.date.desc())
-
-    # Apply offset to skip the first 3 posts and paginate
-    paginated_posts = query.offset(3).paginate(page=page, per_page=per_page, error_out=False)
-
-    # Get next and previous page URLs for pagination
-    next_url = url_for('blogss', page=paginated_posts.next_num) if paginated_posts.has_next else None
-    prev_url = url_for('blogss', page=paginated_posts.prev_num) if paginated_posts.has_prev else None
-
-    return render_template(
-        'carousel.html',
-        posts=paginated_posts.items,
-        latest_posts=latest_posts,
-        next_url=next_url,
-        prev_url=prev_url
-    )
-
-
-
-
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == 'POST':
