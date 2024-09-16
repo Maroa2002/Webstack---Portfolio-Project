@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
 from flask import abort
-from sqlalchemy.orm import relationship
+# from sqlalchemy.orm import relationship
 
 
 app = Flask(__name__)
@@ -53,10 +53,10 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     # Reference back to the User
-    author = relationship("User", back_populates="posts")
+    author = db.relationship("User", back_populates="posts")
 
     # One-to-Many relationship with Comemnt
-    comments = relationship("Comment", back_populates="parent_post")
+    comments = db.relationship("Comment", back_populates="parent_post")
 
 
 # User table model
@@ -68,10 +68,10 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(250), nullable=False)
 
     # One-to-Many relationship with BlogPost
-    posts = relationship("Post", back_populates="author")
+    posts = db.relationship("Post", back_populates="author")
 
     # One-to-Many relationship with Comment
-    comments = relationship("Comment", back_populates="comment_author")
+    comments = db.relationship("Comment", back_populates="comment_author")
 
 
 # The Comment model
@@ -79,19 +79,19 @@ class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text, nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.now(datetime.UTC))
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     # Foreign key linking the comment to a blog post
     post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'), nullable=False)
     
     # Relationship back to the BlogPost
-    parent_post = relationship("Post", back_populates="comments")
+    parent_post = db.relationship("Post", back_populates="comments")
     
     # Foreign key linking the comment to a user (author)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     # Relationship back to the User
-    comment_author = relationship("User", back_populates="comments")
+    comment_author = db.relationship("User", back_populates="comments")
 
 
 # admin decorator
@@ -189,7 +189,7 @@ def get_each_post(post_id):
                 body=comment_body,
                 author_id=current_user.id,
                 post_id=post_id,
-                date_posted=datetime.now(datetime.UTC)
+                date_posted=datetime.utcnow()
             )
             db.session.add(new_comment)
             db.session.commit()
@@ -217,7 +217,7 @@ def create_new_post():
             subtitle = request.form.get("subtitle"),
             date = get_current_date(),
             body = request.form.get("body"),
-            author = request.form.get("author"),
+            author_id = current_user.id,
             img_url = request.form.get("img_url"),
         )
 
