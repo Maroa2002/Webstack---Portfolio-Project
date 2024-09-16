@@ -68,6 +68,25 @@ class User(db.Model, UserMixin):
     # One-to-Many relationship with BlogPost
     posts = relationship("Post", back_populates="author")
 
+    # relationship with comment
+    comments = relationship("Comment", back_populates="comment_author")
+
+
+# The Comment model
+class Comment(db.Model):
+    __tablename__ = "comments"
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.Text, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+
+    # Relationship with User
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    Comment_author = relationship("User", back_populates="comments")
+
+    post = db.relationship('Post', backref='comments', lazy=True)
+
 
 # admin decorator
 def admin_only(function):
