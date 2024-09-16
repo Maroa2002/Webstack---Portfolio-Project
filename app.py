@@ -22,7 +22,7 @@ gmail_password = os.environ.get("GMAIL_PASSWORD")
 
 # configurations for sqlalchemy and the database
 DB_PWD = os.environ.get("DB_PWD")
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{DB_PWD}@localhost/blogs'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{DB_PWD}@localhost/blog_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app) #  creating the db object for managing CRUD operations
 
