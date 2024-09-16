@@ -43,7 +43,7 @@
             <h2>Comments</h2>
 
             <!-- Comments Form -->
-            <form action="{{ url_for('add_comment', post_id=post.id) }}" method="POST">
+            <form action="{{ url_for('get_each_post', post_id=post.id) }}" method="POST">
                 {{ ckeditor.config(name='comment', value='', width='100%') }}
                 <button type="submit" class="submit-btn">Add Comment</button>
             </form>
