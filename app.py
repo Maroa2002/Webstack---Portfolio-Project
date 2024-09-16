@@ -22,7 +22,7 @@ gmail_password = os.environ.get("GMAIL_PASSWORD")
 
 # configurations for sqlalchemy and the database
 DB_PWD = os.environ.get("DB_PWD")
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{DB_PWD}@localhost/blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{DB_PWD}@localhost/blogs'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app) #  creating the db object for managing CRUD operations
 
@@ -51,7 +51,7 @@ class Post(db.Model):
     img_url = db.Column(db.String(250), nullable=False)
 
     # Foreign key to link to the User (Parent)
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     # Reference back to the User
     author = relationship("User", back_populates="posts")
