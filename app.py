@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
 from flask import abort
+from sqlalchemy.orm import relationship
 
 
 app = Flask(__name__)
@@ -40,6 +41,7 @@ def load_user(user_id):
 
 # The model for the posts (table in database blog)
 class Post(db.Model):
+    __tablename__ = "blog_posts"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(250), unique=True, nullable=False)
     subtitle = db.Column(db.String(250), nullable=False)
@@ -48,13 +50,23 @@ class Post(db.Model):
     author = db.Column(db.String(250), nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
 
+    # Foreign key to link to the User (Parent)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
+    # Reference back to the User
+    author = relationship("User", back_populates="posts")
+
 
 # User table model
 class User(db.Model, UserMixin):
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
+
+    # One-to-Many relationship with BlogPost
+    posts = relationship("Post", back_populates="author")
 
 
 # admin decorator
