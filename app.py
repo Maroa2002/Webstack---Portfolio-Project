@@ -5,7 +5,9 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from functools import wraps
+from flask import abort
 
 
 app = Flask(__name__)
@@ -53,6 +55,18 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
+
+
+# admin decorator
+def admin_only(function):
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        # If id is not 1, return and abort with 403 error
+        if current_user.is_authenticated and current_user.id != 1:
+            return abort(403)
+        # else proceed with the route function
+        return function(*args, **kwargs)        
+    return wrapper
 
 
 @app.route("/", methods=['GET'])
@@ -128,6 +142,7 @@ def get_each_post(post_id):
 
 @app.route("/dashboard", methods=["POST", "GET"])
 @login_required
+@admin_only
 def view_dashboard():
     posts = Post.query.all()
 
