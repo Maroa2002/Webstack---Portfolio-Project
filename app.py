@@ -85,13 +85,13 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'), nullable=False)
     
     # Relationship back to the BlogPost
-    parent_post = db.relationship("Post", back_populates="comments")
+    parent_post = relationship("Post", back_populates="comments")
     
     # Foreign key linking the comment to a user (author)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     # Relationship back to the User
-    comment_author = db.relationship("User", back_populates="comments")
+    comment_author = relationship("User", back_populates="comments")
 
 
 # admin decorator
