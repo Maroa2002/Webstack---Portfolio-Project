@@ -26,7 +26,7 @@
                     <div class="carousel-caption d-none d-md-block">
                         <h2>{{ post.title }}</h2>
                         <p>{{ post.subtitle }}</p>
-                        <p>By {{ post.author }} on {{ post.date }}</p>
+                        <p>By {{ post.author.name }} on {{ post.date }}</p>
                         <a href="{{ url_for('get_each_post', post_id=post.id) }}" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
         <div class="post">
             <h3>{{ post.title }}</h3>
             <p>{{ post.subtitle }}</p>
-            <p>By {{ post.author }} on {{ post.date }}</p>
+            <p>By {{ post.author.name }} on {{ post.date }}</p>
             <p>{{ post.body[:200] }}...</p> <!-- Show a preview of the body -->
             <a href="{{ url_for('get_each_post', post_id=post.id) }}" class="btn btn-secondary">Read More</a>
         </div>
@@ -78,5 +78,15 @@
      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+     <script>
+        const menuIcon = document.getElementById('menu-icon');
+        const navbar = document.querySelector('.navbar ul');
+    
+        menuIcon.addEventListener('click', () => {
+            menuIcon.classList.toggle('active');
+            navbar.classList.toggle('active');
+        });
+    </script>
+    
 </body>
 </html>
