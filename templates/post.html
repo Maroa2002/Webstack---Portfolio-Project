@@ -48,7 +48,17 @@
                 <button type="submit" class="submit-btn">Add Comment</button>
             </form>
 
-            
+            <!-- Display Comments -->
+            <div class="comments-list">
+                {% for comment in post.comments %}
+                <div class="comment-item">
+                    <p><strong>{{ comment.author }}:</strong> {{ comment.body | safe }}</p>
+                    <p><small>{{ comment.date_posted }}</small></p>
+                </div>
+                {% else %}
+                <p>No comments yet. Be the first to comment!</p>
+                {% endfor %}
+            </div>
         </section>
 
         <!-- Back to Blog Button -->
