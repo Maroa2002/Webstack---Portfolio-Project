@@ -43,17 +43,21 @@
             <h2>Comments</h2>
 
             <!-- Comments Form -->
+            {{ if current_user.is_authenticated }}
             <form action="{{ url_for('get_each_post', post_id=post.id) }}" method="POST">
                 {{ ckeditor.config(name='comment', value='', width='100%') }}
                 {{ ckeditor.create('comment') }}
                 <button type="submit" class="submit-btn">Add Comment</button>
             </form>
+            {% else %}
+            <p>You need to <a href="{{ url_for('login') }}">login</a> to comment.</p>
+            {% endif %}
 
             <!-- Display Comments -->
             <div class="comments-list">
-                {% for comment in post.comments %}
+                {% for comment in comments %}
                 <div class="comment-item">
-                    <p><strong>{{ comment.author }}:</strong> {{ comment.body | safe }}</p>
+                    <p><strong>{{ comment.comment_author.name }}:</strong> {{ comment.body | safe }}</p>
                     <p><small>{{ comment.date_posted }}</small></p>
                 </div>
                 {% else %}
