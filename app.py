@@ -169,10 +169,32 @@ def signup():
     return render_template("login.html", page_title='Sign Up', form_action=url_for('signup'))
 
 
-@app.route("/post/<int:post_id>")
+@app.route("/post/<int:post_id>", methods=["POST", "GET"])
 @login_required
 def get_each_post(post_id):
     post = Post.query.get_or_404(post_id)
+
+    if request.method == "POST":
+        # Ensure the user is logged in
+        if not current_user.is_authenticated:
+            flash('You need to be logged in to comment.', 'danger')
+            return redirect(url_for('login'))
+        
+        # Get comment content from the form
+        comment_body = request.form.get('comment')
+
+        # Create a new comment
+        if comment_body:
+            new_comment = Comment(
+                body=comment_body,
+                author_id=current_user.id,
+                post_id=post_id,
+                date_posted=datetime.utcnow()
+            )
+            db.session.add(new_comment)
+            db.session.commit()
+            flash('Comment added successfully!', 'success')
+            return redirect(url_for('get_each_post', post_id=post_id))
 
     return render_template("post.html", post=post)
 
