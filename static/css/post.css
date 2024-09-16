@@ -185,6 +185,29 @@ footer .footer-info p {
     background-color: #e64a19;
 }
 
+.comments-section {
+    margin-top: 40px;
+}
+
+.comments-list {
+    margin-top: 20px;
+}
+
+.comment-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.submit-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     .post-container {
