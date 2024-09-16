@@ -79,7 +79,7 @@ class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text, nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.now().strftime("%Y-%m-%d"))
 
     # Foreign key linking the comment to a blog post
     post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'), nullable=False)
