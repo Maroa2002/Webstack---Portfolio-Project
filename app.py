@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
 from flask import abort
-# from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship
 
 
 app = Flask(__name__)
@@ -53,10 +53,10 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     # Reference back to the User
-    author = db.relationship("User", back_populates="posts")
+    author = relationship("User", back_populates="posts")
 
     # One-to-Many relationship with Comemnt
-    comments = db.relationship("Comment", back_populates="parent_post")
+    comments = relationship("Comment", back_populates="parent_post")
 
 
 # User table model
@@ -68,10 +68,10 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(250), nullable=False)
 
     # One-to-Many relationship with BlogPost
-    posts = db.relationship("Post", back_populates="author")
+    posts = relationship("Post", back_populates="author")
 
     # One-to-Many relationship with Comment
-    comments = db.relationship("Comment", back_populates="comment_author")
+    comments = relationship("Comment", back_populates="comment_author")
 
 
 # The Comment model
@@ -85,13 +85,13 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'), nullable=False)
     
     # Relationship back to the BlogPost
-    parent_post = db.relationship("Post", back_populates="comments")
+    parent_post = relationship("Post", back_populates="comments")
     
     # Foreign key linking the comment to a user (author)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     # Relationship back to the User
-    comment_author = db.relationship("User", back_populates="comments")
+    comment_author = relationship("User", back_populates="comments")
 
 
 # admin decorator
@@ -303,6 +303,7 @@ def get_current_date():
 
 
 if __name__ == "__main__":
+    print(app.url_map)
     with app.app_context():
         db.create_all()
     app.run(debug=True)
