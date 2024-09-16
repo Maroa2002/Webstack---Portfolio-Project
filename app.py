@@ -47,7 +47,6 @@ class Post(db.Model):
     subtitle = db.Column(db.String(250), nullable=False)
     date = db.Column(db.String(250), nullable=False)
     body = db.Column(db.Text, nullable=False)
-    author = db.Column(db.String(250), nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
 
     # Foreign key to link to the User (Parent)
@@ -55,6 +54,9 @@ class Post(db.Model):
     
     # Reference back to the User
     author = relationship("User", back_populates="posts")
+
+    # One-to-Many relationship with Comemnt
+    comments = relationship("Comment", back_populates="parent_post")
 
 
 # User table model
@@ -68,7 +70,7 @@ class User(db.Model, UserMixin):
     # One-to-Many relationship with BlogPost
     posts = relationship("Post", back_populates="author")
 
-    # relationship with comment
+    # One-to-Many relationship with Comment
     comments = relationship("Comment", back_populates="comment_author")
 
 
@@ -79,13 +81,13 @@ class Comment(db.Model):
     body = db.Column(db.Text, nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+    # Relationship with the BlogPost
+    post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'), nullable=False)
+    parent_post = relationship("BlogPost", back_populates="comments")
 
     # Relationship with User
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     Comment_author = relationship("User", back_populates="comments")
-
-    post = db.relationship('Post', backref='comments', lazy=True)
 
 
 # admin decorator
