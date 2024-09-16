@@ -196,7 +196,7 @@ def get_each_post(post_id):
             flash('Comment added successfully!', 'success')
             return redirect(url_for('get_each_post', post_id=post_id))
 
-    return render_template("post.html", post=post)
+    return render_template("post.html", post=post, comments=post.comments)
 
 
 @app.route("/dashboard", methods=["POST", "GET"])
