@@ -33,7 +33,9 @@
                 {% endif %}
                 <li><a href = "{{ url_for('about') }}">ABOUT</a></li>
                 <li><a href = "{{ url_for('contact') }}">CONTACT</a></li>
-                <li><a href = "{{ url_for('view_dashboard') }}">DASHBOARD</a></li>
+                {% if current_user.id == 1 %}
+                    <li><a href = "{{ url_for('view_dashboard') }}">DASHBOARD</a></li>
+                {% endif %}
                 {% if current_user.is_authenticated %}
                     <li><a href = "{{ url_for('logout') }}">LOG OUT</a></li>
                 {% endif %}
