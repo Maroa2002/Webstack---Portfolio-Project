@@ -255,7 +255,7 @@ def edit_current_post(post_id):
         post_to_edit.title = request.form.get("title")
         post_to_edit.subtitle = request.form.get("subtitle")
         post_to_edit.body = request.form.get("body")
-        post_to_edit.author = request.form.get("author")
+        post_to_edit.author_id = current_user.id
         post_to_edit.img_url = request.form.get("img_url")
 
         db.session.commit()
