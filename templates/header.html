@@ -1,24 +1,4 @@
 
-     <!-- navbar -->
-        <!-- <nav class = "navbar">
-            <div class = "container">
-                <a href = "{{ url_for('blogs') }}" class = "navbar-brand">Blog</a>
-                <div class = "navbar-nav">
-                    <a href = "{{ url_for('blogs') }}">home</a>
-                    {% if not current_user.is_authenticated %}
-                        <a href = "{{ url_for('login') }}">login</a>
-                        <a href = "{{ url_for('signup') }}">sign up</a>
-                    {% endif %}
-                    <a href = "{{ url_for('about') }}">about</a>
-                    <a href = "{{ url_for('contact') }}">contact</a>
-                    <a href = "{{ url_for('view_dashboard') }}">dashboard</a>
-                    {% if current_user.is_authenticated %}
-                        <a href = "{{ url_for('logout') }}">log out</a>
-                    {% endif %}
-                </div>
-            </div>
-        </nav> -->
-
 <!-- header.html -->
     <div class="header">
         <div class="logo">
