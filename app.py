@@ -287,12 +287,6 @@ def contact():
                 to_addrs=my_email,
                 msg="Subject:Contact\n\n{}\n\n{}\n\n{}".format(name, email, message)
         )
-
-        # # Basic validation
-        # if not name or not email or not message:
-        #     return jsonify({"error": "All fields are required!"}), 400
-
-        # return jsonify({"message": "Message successfully sent"}), 200
         return render_template("contact.html")
 
     return render_template("contact.html")
