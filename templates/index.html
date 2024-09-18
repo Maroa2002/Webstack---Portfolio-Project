@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
+{% extends 'base.html' %}
 
-    <!-- Add Bootstrap CSS for styling and carousel -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+{% block title %}Home{% endblock %}
 
-  {% include "header.html" %}
-  
+{% block content %}  
   <div class="container">
     <!-- Blog Carousel for Latest Posts -->
     <div id="blogCarousel" class="carousel slide" data-ride="carousel">
@@ -71,22 +58,4 @@
     </div>
 </div>
 
-    {% include "footer.html" %}
-
-     <!-- Add Bootstrap and jQuery Scripts for Carousel -->
-     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-     <script>
-        const menuIcon = document.getElementById('menu-icon');
-        const navbar = document.querySelector('.navbar ul');
-    
-        menuIcon.addEventListener('click', () => {
-            menuIcon.classList.toggle('active');
-            navbar.classList.toggle('active');
-        });
-    </script>
-    
-</body>
-</html>
+{% endblock %}
