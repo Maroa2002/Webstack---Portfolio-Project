@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/post.css') }}">
+{% extends 'base.html' %}
 
-    <!-- CKEditor Script -->
-    {{ ckeditor.load() }}
-    
-</head>
-<body>
-    
-    {% include "header.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %} 
     
     <main class="post-container">
         <article class="post-content">
@@ -72,7 +60,4 @@
         </div>
     </main>
 
-    {% include "footer.html" %}
-
-</body>
-</html>
+{% endblock %}
