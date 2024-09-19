@@ -106,11 +106,10 @@ footer .footer-info p {
     .header .navbar ul {
         display: none;
         flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 0;
+        position: relative;
         background-color: #333;
         width: 100%;
+        margin-top: 40px;
     }
 
     .header .navbar ul li {
