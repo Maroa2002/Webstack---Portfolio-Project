@@ -119,13 +119,17 @@ footer .footer-info p {
         padding: 10px 0;
     }
 
+    .header .navbar ul.active {
+        display: flex;
+    }
+
     .header .menu-icon {
         display: flex;
     }
 
-    .header .menu-icon.active + .navbar ul {
+    /* .header .menu-icon.active + .navbar ul {
         display: flex;
-    }
+    } */
 
     footer {
         font-size: 0.9rem;
