@@ -96,7 +96,6 @@ Only users with `id = 1` (admin) have access to the admin dashboard and can dele
 
 ## Future Improvements
 
-- **File Uploads**: Allow users to upload images for their blog posts.
 - **User Profiles**: Create user profiles to show individual user activity (posts, comments).
 - **Email Confirmation**: Add email confirmation during signup for added security.
 - **Full-text Search**: Implement a search feature to allow users to search for blog posts.
