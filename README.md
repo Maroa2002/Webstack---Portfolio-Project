@@ -1,5 +1,7 @@
 
 # Blog Website Project
+![Blog](https://github.com/user-attachments/assets/78b5b57e-2fc8-4cda-8da1-b5b1ed24bac9)
+
 
 This is a blog website built using Flask, SQLAlchemy, and MySQL. The application allows users to register, log in, and create blog posts. Users can also comment on posts, and the website includes pagination to navigate through posts efficiently. An admin panel is available to manage blog content, and the site has an integrated contact form that sends emails using SMTP.
 
