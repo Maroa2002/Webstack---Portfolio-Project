@@ -61,7 +61,7 @@ This is a blog website built using Flask, SQLAlchemy, and MySQL. The application
 
 5. Set up your MySQL database:
    ```sql
-   CREATE DATABASE blog_db;
+   CREATE DATABASE IF NOT EXISTS blog_db;
    ```
 
 6. Run the application:
